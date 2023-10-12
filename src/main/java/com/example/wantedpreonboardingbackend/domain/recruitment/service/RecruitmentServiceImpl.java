@@ -33,6 +33,13 @@ public class RecruitmentServiceImpl implements RecruitmentService {
         recruitment.updateInfo(dto);
     }
 
+    @Override
+    @Transactional
+    public void deleteRecruitment(Long id) {
+        Recruitment recruitment = findById(id);
+        recruitmentRepository.delete(recruitment);
+    }
+
     public Recruitment findById(Long id) {
         return recruitmentRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.RECRUITMENT_NOT_FOUND));
