@@ -5,6 +5,7 @@ import com.example.wantedpreonboardingbackend.domain.company.service.CompanyServ
 import com.example.wantedpreonboardingbackend.domain.recruitment.domain.Recruitment;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentCreateReq;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentUpdateReq;
+import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.RecruitmentDetailResp;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.RecruitmentResp;
 import com.example.wantedpreonboardingbackend.domain.recruitment.repository.RecruitmentRepository;
 import com.example.wantedpreonboardingbackend.global.exception.BusinessException;
@@ -52,7 +53,13 @@ public class RecruitmentServiceImpl implements RecruitmentService {
                 .collect(Collectors.toList());
     }
 
-    public Recruitment findById(Long id) {
+    @Override
+    public RecruitmentDetailResp getRecruitmentDetail(Long id) {
+        Recruitment recruitment = findById(id);
+        return RecruitmentDetailResp.of(recruitment);
+    }
+
+    private Recruitment findById(Long id) {
         return recruitmentRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.RECRUITMENT_NOT_FOUND));
     }

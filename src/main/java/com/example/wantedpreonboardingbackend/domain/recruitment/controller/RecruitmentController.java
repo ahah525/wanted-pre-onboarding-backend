@@ -2,6 +2,7 @@ package com.example.wantedpreonboardingbackend.domain.recruitment.controller;
 
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentCreateReq;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentUpdateReq;
+import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.RecruitmentDetailResp;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.RecruitmentResp;
 import com.example.wantedpreonboardingbackend.domain.recruitment.service.RecruitmentService;
 import jakarta.validation.Valid;
@@ -44,5 +45,12 @@ public class RecruitmentController {
     public ResponseEntity<?> getAllRecruitment() {
         List<RecruitmentResp> recruitments = recruitmentService.getAllRecruitment();
         return ResponseEntity.ok(recruitments);
+    }
+
+    // 채용공고 상세조회
+    @GetMapping("/{recruitment-id}")
+    public ResponseEntity<?> getRecruitmentDetail(@PathVariable(name = "recruitment-id") Long id) {
+        RecruitmentDetailResp recruitment = recruitmentService.getRecruitmentDetail(id);
+        return ResponseEntity.ok(recruitment);
     }
 }
