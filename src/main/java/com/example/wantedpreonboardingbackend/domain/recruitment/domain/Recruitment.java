@@ -5,8 +5,10 @@ import com.example.wantedpreonboardingbackend.global.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import lombok.Builder;
 
 @Entity
+@Builder
 public class Recruitment extends BaseEntity {
     @Column(nullable = false)
     private String position;
