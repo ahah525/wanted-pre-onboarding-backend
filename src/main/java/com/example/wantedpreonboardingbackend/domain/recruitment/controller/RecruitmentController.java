@@ -2,11 +2,14 @@ package com.example.wantedpreonboardingbackend.domain.recruitment.controller;
 
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentCreateReq;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentUpdateReq;
+import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.RecruitmentResp;
 import com.example.wantedpreonboardingbackend.domain.recruitment.service.RecruitmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,5 +37,12 @@ public class RecruitmentController {
     public ResponseEntity<?> deleteRecruitment(@PathVariable(name = "recruitment-id") Long id) {
         recruitmentService.deleteRecruitment(id);
         return ResponseEntity.ok(null);
+    }
+
+    // 채용공고 목록 조회
+    @GetMapping("")
+    public ResponseEntity<?> getAllRecruitment() {
+        List<RecruitmentResp> recruitments = recruitmentService.getAllRecruitment();
+        return ResponseEntity.ok(recruitments);
     }
 }

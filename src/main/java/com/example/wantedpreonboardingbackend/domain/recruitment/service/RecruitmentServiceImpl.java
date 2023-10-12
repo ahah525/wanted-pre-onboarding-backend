@@ -5,12 +5,16 @@ import com.example.wantedpreonboardingbackend.domain.company.service.CompanyServ
 import com.example.wantedpreonboardingbackend.domain.recruitment.domain.Recruitment;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentCreateReq;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentUpdateReq;
+import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.RecruitmentResp;
 import com.example.wantedpreonboardingbackend.domain.recruitment.repository.RecruitmentRepository;
 import com.example.wantedpreonboardingbackend.global.exception.BusinessException;
 import com.example.wantedpreonboardingbackend.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +42,14 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     public void deleteRecruitment(Long id) {
         Recruitment recruitment = findById(id);
         recruitmentRepository.delete(recruitment);
+    }
+
+    @Override
+    public List<RecruitmentResp> getAllRecruitment() {
+        List<Recruitment> recruitments = recruitmentRepository.findAll();
+        return recruitments.stream()
+                .map(RecruitmentResp::of)
+                .collect(Collectors.toList());
     }
 
     public Recruitment findById(Long id) {
