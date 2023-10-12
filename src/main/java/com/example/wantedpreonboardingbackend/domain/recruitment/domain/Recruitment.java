@@ -5,6 +5,7 @@ import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.Rec
 import com.example.wantedpreonboardingbackend.global.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +30,7 @@ public class Recruitment extends BaseEntity {
     @Column(nullable = false)
     private String stack;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 
     public void updateInfo(RecruitmentUpdateReq dto) {

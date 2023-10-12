@@ -1,5 +1,6 @@
 package com.example.wantedpreonboardingbackend.domain.recruitment.service;
 
+import com.example.wantedpreonboardingbackend.domain.recruitment.domain.Recruitment;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentCreateReq;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentUpdateReq;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.RecruitmentDetailResp;
@@ -17,4 +18,6 @@ public interface RecruitmentService {
     List<RecruitmentResp> getAllRecruitment();
 
     RecruitmentDetailResp getRecruitmentDetail(Long id);
+
+    Recruitment findById(Long id);
 }

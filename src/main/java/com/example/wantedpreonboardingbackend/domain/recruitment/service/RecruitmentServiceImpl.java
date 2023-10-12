@@ -61,7 +61,8 @@ public class RecruitmentServiceImpl implements RecruitmentService {
         return RecruitmentDetailResp.of(recruitment, ids);
     }
 
-    private Recruitment findById(Long id) {
+    @Override
+    public Recruitment findById(Long id) {
         return recruitmentRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.RECRUITMENT_NOT_FOUND));
     }
