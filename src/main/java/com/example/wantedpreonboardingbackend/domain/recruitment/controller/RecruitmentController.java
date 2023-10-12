@@ -1,6 +1,7 @@
 package com.example.wantedpreonboardingbackend.domain.recruitment.controller;
 
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentCreateReq;
+import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentUpdateReq;
 import com.example.wantedpreonboardingbackend.domain.recruitment.service.RecruitmentServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,14 @@ public class RecruitmentController {
     @PostMapping("")
     public ResponseEntity<?> registerRecruitment(@RequestBody @Valid RecruitmentCreateReq dto) {
         recruitmentServiceImpl.registerRecruitment(dto);
+        return ResponseEntity.ok(null);
+    }
+
+    // 채용공고 수정
+    @PatchMapping("/{recruitment-id}")
+    public ResponseEntity<?> updateRecruitment(@PathVariable(name = "recruitment-id") Long id,
+                                               @RequestBody @Valid RecruitmentUpdateReq dto) {
+        recruitmentServiceImpl.updateRecruitment(id, dto);
         return ResponseEntity.ok(null);
     }
 }
