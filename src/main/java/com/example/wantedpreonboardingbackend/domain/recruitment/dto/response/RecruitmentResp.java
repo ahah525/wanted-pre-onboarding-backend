@@ -32,6 +32,5 @@ public class RecruitmentResp {
                 .stack(recruitment.getStack())
                 .build();
     }
-
 }
 

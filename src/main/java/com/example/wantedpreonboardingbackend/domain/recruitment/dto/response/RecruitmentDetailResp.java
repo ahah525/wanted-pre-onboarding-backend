@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @Builder
 @AllArgsConstructor
@@ -20,8 +22,9 @@ public class RecruitmentDetailResp {
     private Integer compensation;
     private String content;
     private String stack;
+    private List<Long> ids; // 회사가 올린 다른 채용공고 id 목록
 
-    public static RecruitmentDetailResp of(Recruitment recruitment) {
+    public static RecruitmentDetailResp of(Recruitment recruitment, List<Long> ids) {
         Company company = recruitment.getCompany();
         return RecruitmentDetailResp.builder()
                 .id(recruitment.getId())
@@ -32,8 +35,8 @@ public class RecruitmentDetailResp {
                 .compensation(recruitment.getCompensation())
                 .content(recruitment.getContent())
                 .stack(recruitment.getStack())
+                .ids(ids)
                 .build();
     }
-
 }
 

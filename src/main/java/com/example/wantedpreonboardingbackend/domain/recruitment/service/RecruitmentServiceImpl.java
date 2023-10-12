@@ -8,6 +8,7 @@ import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.Rec
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.RecruitmentDetailResp;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.RecruitmentResp;
 import com.example.wantedpreonboardingbackend.domain.recruitment.repository.RecruitmentRepository;
+import com.example.wantedpreonboardingbackend.global.BaseEntity;
 import com.example.wantedpreonboardingbackend.global.exception.BusinessException;
 import com.example.wantedpreonboardingbackend.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -56,11 +57,20 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     @Override
     public RecruitmentDetailResp getRecruitmentDetail(Long id) {
         Recruitment recruitment = findById(id);
-        return RecruitmentDetailResp.of(recruitment);
+        List<Long> ids = findIdsByCompanyAndIdNot(recruitment.getCompany(), id);
+        return RecruitmentDetailResp.of(recruitment, ids);
     }
 
     private Recruitment findById(Long id) {
         return recruitmentRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.RECRUITMENT_NOT_FOUND));
+    }
+
+    // 회사의 채용공고 중 해당 채용공고를 제외한 id 목록 조회
+    private List<Long> findIdsByCompanyAndIdNot(Company company, Long id) {
+        List<Recruitment> recruitments = recruitmentRepository.findByCompanyAndIdNot(company, id);
+        return recruitments.stream()
+                .map(BaseEntity::getId)
+                .collect(Collectors.toList());
     }
 }
