@@ -71,4 +71,23 @@ class RecruitmentServiceImplTest {
         assertThat(recruitment.getContent()).isEqualTo("원티드랩에서 백엔드 경력 개발자를 채용합니다. 자격요건은..");
         assertThat(recruitment.getStack()).isEqualTo("Java");
     }
+
+    @DisplayName("채용공고 삭제")
+    @Test
+    void deleteRecruitmentTest() {
+        // given
+        RecruitmentCreateReq dto = RecruitmentCreateReq.builder()
+                .companyId(1L)
+                .position("백엔드 주니어 개발자")
+                .compensation(1000000)
+                .content("원티드랩에서 백엔드 주니어 개발자를 채용합니다. 자격요건은..")
+                .stack("Python")
+                .build();
+        Long recruitmentId = recruitmentService.registerRecruitment(dto);
+        // when
+        recruitmentService.deleteRecruitment(recruitmentId);
+        // then
+        Recruitment recruitment = recruitmentRepository.findById(recruitmentId).orElse(null);
+        assertThat(recruitment).isNull();
+    }
 }
