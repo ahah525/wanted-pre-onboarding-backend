@@ -47,9 +47,25 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     }
 
     @Override
-    public List<RecruitmentResp> getAllRecruitment() {
-        List<Recruitment> recruitments = recruitmentRepository.findAll();
-        return recruitments.stream()
+    public List<RecruitmentResp> getAllRecruitment(String search) {
+        // 1. 앞뒤 공백 제거
+        search = search.strip();
+        // 2. ""이면 전체 목록 조회
+        if (search.length() == 0) return findAll();
+        // 3. 검색 조회
+        return findBySearch(search);
+    }
+
+    // 회사명, 포지션, 사용기술에 검색어가 포함된 채용공고 목록 조회
+    private List<RecruitmentResp> findBySearch(String search) {
+        return recruitmentRepository.findByCompanyNameOrPositionOrStackContains(search).stream()
+                .map(RecruitmentResp::of)
+                .collect(Collectors.toList());
+    }
+
+    // 전체 채용공고 목록 조회
+    private List<RecruitmentResp> findAll() {
+        return recruitmentRepository.findAll().stream()
                 .map(RecruitmentResp::of)
                 .collect(Collectors.toList());
     }

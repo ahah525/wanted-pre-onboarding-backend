@@ -42,8 +42,8 @@ public class RecruitmentController {
 
     // 채용공고 목록 조회
     @GetMapping("")
-    public ResponseEntity<?> getAllRecruitment() {
-        List<RecruitmentResp> recruitments = recruitmentService.getAllRecruitment();
+    public ResponseEntity<?> getAllRecruitment(@RequestParam(required = false, defaultValue = "") String search) {
+        List<RecruitmentResp> recruitments = recruitmentService.getAllRecruitment(search);
         return ResponseEntity.ok(recruitments);
     }
 
