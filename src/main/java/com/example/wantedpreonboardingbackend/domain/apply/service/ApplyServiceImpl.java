@@ -22,7 +22,7 @@ public class ApplyServiceImpl implements ApplyService {
 
     @Override
     @Transactional
-    public void apply(ApplyCreateReq dto) {
+    public Long apply(ApplyCreateReq dto) {
         Member member = memberService.findById(dto.getMemberId());
         Recruitment recruitment = recruitmentService.findById(dto.getRecruitmentId());
         // 이미 지원한 채용 공고에 다시 지원하는 경우 예외처리
@@ -33,6 +33,6 @@ public class ApplyServiceImpl implements ApplyService {
                 .member(member)
                 .recruitment(recruitment)
                 .build();
-        applyRepository.save(apply);
+        return applyRepository.save(apply).getId();
     }
 }
