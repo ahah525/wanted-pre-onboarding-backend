@@ -5,6 +5,7 @@ import com.example.wantedpreonboardingbackend.domain.company.repository.CompanyR
 import com.example.wantedpreonboardingbackend.domain.recruitment.domain.Recruitment;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentCreateReq;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.request.RecruitmentUpdateReq;
+import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.RecruitmentDetailResp;
 import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.RecruitmentResp;
 import com.example.wantedpreonboardingbackend.domain.recruitment.repository.RecruitmentRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -149,7 +150,6 @@ class RecruitmentServiceImplTest {
     void getAllRecruitmentTest2() {
         // given
         List<Company> companies = companyRepository.findAll();
-        System.out.println(companies.get(0).getId());
         RecruitmentCreateReq dto1 = RecruitmentCreateReq.builder()
                 .companyId(companies.get(0).getId())
                 .position("백엔드 주니어 개발자")
@@ -175,5 +175,41 @@ class RecruitmentServiceImplTest {
         // 사용기술로 검색
         List<RecruitmentResp> recruitments3 = recruitmentService.getAllRecruitment("java");
         assertThat(recruitments3.size()).isEqualTo(1);
+    }
+
+    @DisplayName("채용공고 상세 조회 - 회사명,국가,지역,채용포지션,채용보상금,채용내용,회사가올린다른채용공고 목록을 조회한다.")
+    @Test
+    void getRecruitmentDetailTest() {
+        // given
+        List<Company> companies = companyRepository.findAll();
+        RecruitmentCreateReq dto1 = RecruitmentCreateReq.builder()
+                .companyId(companies.get(0).getId())
+                .position("백엔드 주니어 개발자")
+                .compensation(1000000)
+                .content("원티드랩에서 백엔드 주니어 개발자를 채용합니다. 자격요건은..")
+                .stack("Python")
+                .build();
+        Long id1 = recruitmentService.registerRecruitment(dto1);
+        RecruitmentCreateReq dto2 = RecruitmentCreateReq.builder()
+                .companyId(companies.get(0).getId())
+                .position("백엔드 경력 개발자")
+                .compensation(1500000)
+                .content("원티드랩에서 백엔드 경력 개발자를 채용합니다. 자격요건은..")
+                .stack("Java")
+                .build();
+        Long id2 = recruitmentService.registerRecruitment(dto2);
+        // when
+        RecruitmentDetailResp resp = recruitmentService.getRecruitmentDetail(id1);
+        // then
+        assertThat(resp.getCompanyName()).isEqualTo("원티드랩");
+        assertThat(resp.getNation()).isEqualTo("한국");
+        assertThat(resp.getRegion()).isEqualTo("서울");
+        assertThat(resp.getPosition()).isEqualTo("백엔드 주니어 개발자");
+        assertThat(resp.getCompensation()).isEqualTo(1000000);
+        assertThat(resp.getContent()).isEqualTo("원티드랩에서 백엔드 주니어 개발자를 채용합니다. 자격요건은..");
+        assertThat(resp.getStack()).isEqualTo("Python");
+        // 회사의 다른 채용 공고
+        assertThat(resp.getIds().size()).isEqualTo(1);
+        assertThat(resp.getIds().get(0)).isEqualTo(id2);
     }
 }
