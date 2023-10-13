@@ -9,7 +9,7 @@ import com.example.wantedpreonboardingbackend.domain.recruitment.dto.response.Re
 import java.util.List;
 
 public interface RecruitmentService {
-    void registerRecruitment(RecruitmentCreateReq dto);
+    Long registerRecruitment(RecruitmentCreateReq dto);
 
     void updateRecruitment(Long id, RecruitmentUpdateReq dto);
 

@@ -27,9 +27,9 @@ public class RecruitmentServiceImpl implements RecruitmentService {
 
     @Override
     @Transactional
-    public void registerRecruitment(RecruitmentCreateReq dto) {
+    public Long registerRecruitment(RecruitmentCreateReq dto) {
         Company company = companyService.findById(dto.getCompanyId());
-        recruitmentRepository.save(RecruitmentCreateReq.toEntity(company, dto));
+        return recruitmentRepository.save(RecruitmentCreateReq.toEntity(company, dto)).getId();
     }
 
     @Override
