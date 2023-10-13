@@ -143,4 +143,37 @@ class RecruitmentServiceImplTest {
         assertThat(recruitments1.size()).isEqualTo(2);
         assertThat(recruitments2.size()).isEqualTo(2);
     }
+
+    @DisplayName("채용공고 목록 조회 - 회사명, 포지션, 사용기술에 검색어가 포함된 채용공고를 모두 조회한다.")
+    @Test
+    void getAllRecruitmentTest2() {
+        // given
+        List<Company> companies = companyRepository.findAll();
+        System.out.println(companies.get(0).getId());
+        RecruitmentCreateReq dto1 = RecruitmentCreateReq.builder()
+                .companyId(companies.get(0).getId())
+                .position("백엔드 주니어 개발자")
+                .compensation(1000000)
+                .content("원티드랩에서 백엔드 주니어 개발자를 채용합니다. 자격요건은..")
+                .stack("Python")
+                .build();
+        Long id1 = recruitmentService.registerRecruitment(dto1);
+        RecruitmentCreateReq dto2 = RecruitmentCreateReq.builder()
+                .companyId(companies.get(1).getId())
+                .position("백엔드 경력 개발자")
+                .compensation(1500000)
+                .content("네이버에서 백엔드 경력 개발자를 채용합니다. 자격요건은..")
+                .stack("Java")
+                .build();
+        Long id2 = recruitmentService.registerRecruitment(dto2);
+        // 회사명으로 검색
+        List<RecruitmentResp> recruitments1 = recruitmentService.getAllRecruitment("원티드");
+        assertThat(recruitments1.size()).isEqualTo(1);
+        // 포지션으로 검색
+        List<RecruitmentResp> recruitments2 = recruitmentService.getAllRecruitment("백엔드");
+        assertThat(recruitments2.size()).isEqualTo(2);
+        // 사용기술로 검색
+        List<RecruitmentResp> recruitments3 = recruitmentService.getAllRecruitment("java");
+        assertThat(recruitments3.size()).isEqualTo(1);
+    }
 }
