@@ -8,18 +8,18 @@
 - ORM : `JPA`
 
 ## 📍ERD
-<img width="694" alt="스크린샷 2023-10-14 오후 8 55 06" src="https://github.com/ahah525/wanted-pre-onboarding-backend/assets/48237976/95f8cff1-abc8-4181-bf01-90c27a9740dd">
+<img width="988" alt="스크린샷 2023-10-16 오전 10 28 40" src="https://github.com/ahah525/wanted-pre-onboarding-backend/assets/48237976/d3f21003-21e9-4f75-aa62-01076384963a">
 
 ## 📍주요 기능
 
-- [채용공고 등록](https://github.com/ahah525/wanted-pre-onboarding-backend/edit/main/README.md#0-%EA%B3%B5%ED%86%B5-%EA%B3%A0%EB%A0%A4%EC%82%AC%ED%95%AD)
-- [채용공고 수정](https://github.com/ahah525/wanted-pre-onboarding-backend/edit/main/README.md#2-%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0-%EC%88%98%EC%A0%95--patch-recruitmentrecruitment-id)
-- [채용공고 삭제](https://github.com/ahah525/wanted-pre-onboarding-backend/edit/main/README.md#3-%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0-%EC%82%AD%EC%A0%9C--delete-recruitmentrecruitment-id)
-- [채용공고 목록 조회](https://github.com/ahah525/wanted-pre-onboarding-backend/edit/main/README.md#4-%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0-%EB%AA%A9%EB%A1%9D-%EC%A1%B0%ED%9A%8C--get-recruitment)
+- [채용공고 등록](#1-채용공고-등록--post-recruitment)
+- [채용공고 수정](#2-채용공고-수정--patch-recruitmentrecruitment-id)
+- [채용공고 삭제](#3-채용공고-삭제--delete-recruitmentrecruitment-id)
+- [채용공고 목록 조회](#4-채용공고-목록-조회--get-recruitment)
     - 채용공고 전체 조회
     - 채용공고 검색 조회
-- [채용공고 상세 조회](https://github.com/ahah525/wanted-pre-onboarding-backend/edit/main/README.md#5-%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C--get-recrutimentrecruitment-id)
-- [채용공고 지원](https://github.com/ahah525/wanted-pre-onboarding-backend/edit/main/README.md#6-%EC%B1%84%EC%9A%A9%EA%B3%B5%EA%B3%A0-%EC%A7%80%EC%9B%90--post-apply)
+- [채용공고 상세 조회](#5-채용공고-상세-조회--get-recrutimentrecruitment-id)
+- [채용공고 지원](#6-채용공고-지원--post-apply)
 
 ## 📍주요 기능 세부 설명
 
