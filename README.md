@@ -8,6 +8,7 @@
 - ORM : `JPA`
 
 ## 📍ERD
+- [ERD 바로가기](https://dbdiagram.io/d/wanted-pre-onboarding-backend-65278a0affbf5169f088f4f5)
 <img width="988" alt="스크린샷 2023-10-16 오전 10 28 40" src="https://github.com/ahah525/wanted-pre-onboarding-backend/assets/48237976/d3f21003-21e9-4f75-aa62-01076384963a">
 
 ## 📍주요 기능
